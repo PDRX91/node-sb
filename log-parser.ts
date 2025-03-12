@@ -1,8 +1,6 @@
 // log-parser.ts
 import * as fs from "fs";
-import * as path from "path";
 import { Mutex } from "async-mutex";
-import { Worker, isMainThread, parentPort, workerData } from "worker_threads";
 
 interface LogEntry {
   timestamp: Date;
@@ -66,7 +64,7 @@ export function parseLogLine(line: string): LogEntry | null {
  * @param entry The parsed log entry.
  * @param mutex The mutex to use for thread-safe updates.
  */
-async function updateGlobalStats(
+export async function updateGlobalStats(
   stats: GlobalStats,
   entry: LogEntry,
   mutex: Mutex
